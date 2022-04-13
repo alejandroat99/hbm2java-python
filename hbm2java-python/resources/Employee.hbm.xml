@@ -1,0 +1,23 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+    <class name="es.alejandroat99.entity.Employee" table="EMPLOYEE">
+        <id name="id" type="java.lang.Integer">
+            <column name="IDENTIFIER"/>
+        </id>
+        <many-to-one name="departament" class="es.alejandroat99.entity.Departament">
+            <column name="ID_DEPARTAMENT"/>
+        </many-to-one>
+        <property name="name" type="java.lang.String">
+            <column name="NAME"/>
+        </property>
+        <property name="salary" type="java.math.BigDecimal">
+            <column name="SALARY"/>
+        </property>
+        <property name="birthDate" type="timestamp">
+            <column name="BIRTH_DATE"/>
+        </property>
+    </class>
+
+</hibernate-mapping>

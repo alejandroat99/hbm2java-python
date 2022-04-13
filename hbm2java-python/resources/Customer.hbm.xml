@@ -1,0 +1,18 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+    <class name="es.alejandroat99.entity.Customer" table="CUSTOMER">
+        <composite-id name="id" class="es.alejandroat99.entity.CustomerId">
+            <key-property name="phone" type="java.lang.String">
+                <column name="PHONE"/> 
+            </key-property>
+            <key-property name="document" type="java.lang.String">
+                <column name="DOCUMENT"/>
+            </key-property>
+        </composite-id>
+        <property name="name" type="java.lang.String">
+            <column name="NAME"/>
+        </property>
+    </class>
+</hibernate-mapping>
