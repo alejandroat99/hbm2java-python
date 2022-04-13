@@ -26,13 +26,6 @@ class JavaClass:
         result += f'Imports: {self.imports}\n'
         return result
 
-    def addAttribute(self, att) -> None:
-        assert type(att) is JavaAttribute
-        self.attributes.append(att)
-
-    def addImport(self, imp) -> None:
-        self.imports.append(imp)
-
     def generateClass(self) -> str:
         classText = ''
         if self.package is not None:

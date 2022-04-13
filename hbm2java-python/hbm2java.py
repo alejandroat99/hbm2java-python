@@ -49,8 +49,7 @@ def mapId(element, jc):
         attType = 'Date'
 
     attribute = JavaAttribute(attributeType=attType.split('.')[-1], attributeName=attName, isKey=True)
-    # jc.attributes.append(attribute)
-    jc.addAttribute(attribute)
+    jc.attributes.append(attribute)
 
 def mapCompositeId(element, jc):
     assert type(element) is ET.Element
@@ -74,14 +73,10 @@ def mapCompositeId(element, jc):
     saveClass(idClass)
     att = JavaAttribute(attributeType=idClass.className, attributeName=name, isKey=True)
 
-    # jc.attributes.append(att)
-    jc.addAttribute(att)
+    jc.attributes.append(att)
 
     if idClass.package != jc.package:
-        # jc.imports.append(classAttrib)
-        jc.addImport(classAttrib)
-
-        
+        jc.imports.append(classAttrib)
 
 def mapManyToOne(element, jc):
     assert type(element) is ET.Element
@@ -96,21 +91,17 @@ def mapManyToOne(element, jc):
     attTypePackage = '.'.join(attType.split('.')[:-1])
     if attTypePackage != jc.package:
         jc.imports.append(attType)
-        jc.addImport(attType)
 
     attribute = JavaAttribute(attributeType=attType.split('.')[-1], attributeName=attName)
-    # jc.attributes.append(attribute)
-    jc.addAttribute(attribute)
+    jc.attributes.append(attribute)
 
 def mapSet(element, jc):
     assert type(element) is ET.Element
     assert type(jc) is JavaClass
     
     if 'java.util.Set' not in jc.imports:
-        # jc.imports.append('java.util.Set')
-        # jc.imports.append('java.util.HashSet')
-        jc.addImport('java.util.Set')
-        jc.addImport('java.util.HashSet')
+        jc.imports.append('java.util.Set')
+        jc.imports.append('java.util.HashSet')
 
     attType = element.attrib['class']
     attName = element.attrib['name']
@@ -121,13 +112,11 @@ def mapSet(element, jc):
     attTypePackage = attType.split('.')[:-1]
     setClass = attType.split('.')[-1]
     if attTypePackage != jc.package:
-        # jc.imports.append(attType)
-        jc.addImport(attType)
+        jc.imports.append(attType)
 
     setType = f'Set<{setClass}>'
     attribute = JavaAttribute(attributeType=setType, attributeName=attName)
-    # jc.attributes.append(attribute)
-    jc.addAttribute(attribute)
+    jc.attributes.append(attribute)
 
 def mapProperty(element, jc):
     assert type(element) is ET.Element
@@ -139,19 +128,15 @@ def mapProperty(element, jc):
 
     # Comprobar si se tiene que realizar un import
     if '.' in attType and not attType.startswith('java.lang'):
-        # jc.imports.append(attType)
-        jc.addImport(attType)
+        jc.imports.append(attType)
 
     if attType == 'timestamp':
         if 'java.util.Date' not in jc.imports:
-            # jc.imports.append('java.util.Date')
-            jc.addImport('java.util.Date')
+            jc.imports.append('java.util.Date')
         attType = 'Date'
 
     attribute = JavaAttribute(attributeType=attType.split('.')[-1], attributeName=attName)
-    # jc.attributes.append(attribute)
-    jc.addAttribute(attribute)
-     
+    jc.attributes.append(attribute)
 
 def mapClass(hClass):
     assert type(hClass) is ET.Element
@@ -185,11 +170,9 @@ def mapClass(hClass):
             mapSet(element, jc) # OK
         elif element.tag == 'property':
             mapProperty(element, jc) # OK
-
     return jc
 
 def hbm2java(filepath):
     xmlClass = readFile(filepath)
     javaClass = mapClass(xmlClass)
-    print(javaClass)
     saveClass(javaClass)
