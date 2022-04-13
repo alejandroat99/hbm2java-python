@@ -21,5 +21,5 @@ hbm2java(filepath)
 
 ```
 
-Also, you can check the (Test.py)[https://github.com/alejandroat99/hbm2java-python/blob/68c18cc6d27ff1088ad53113258ad34507d91581/hbm2java-python/Test.py] file 
+Also, you can check the [Test.py](https://github.com/alejandroat99/hbm2java-python/blob/68c18cc6d27ff1088ad53113258ad34507d91581/hbm2java-python/Test.py) file 
 to see and run an example.
