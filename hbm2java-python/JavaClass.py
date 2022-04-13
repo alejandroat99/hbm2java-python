@@ -12,11 +12,18 @@ class JavaAttribute:
         return f'{{name={self.attributeName}, type={self.attributeType}, isKey={self.isKey}}}'
 
 class JavaClass:
-    def __init__(self, package=None, className=None, imports=[], attributes=[]):
+    def __init__(self, package=None, className=None, imports=None, attributes=None):
         self.package = package
         self.className = className
-        self.imports = imports
-        self.attributes = attributes
+        if imports is None:
+            self.imports = []
+        else:
+            self.imports = imports
+        
+        if attributes is None:
+            self.attributes = []
+        else:
+            self.attributes = attributes
     
     def __str__(self) -> str:
         result = ''
